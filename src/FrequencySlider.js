@@ -15,27 +15,45 @@ const useStyles = makeStyles({
   },
 });
 
+// Some constants for scaling values from slider values 0-100 to relevant values
+const min = 100;
+const max = 500;
+const step = 10;
+const rate = ((max - min) / 100);
+const bias = min;
+function scale(val) {
+  return (val * rate) + bias;
+}
+function normalize(val) {
+  return (val - bias) / rate;
+}
+
 export default function FrequencySlider(props) {
   const classes = useStyles();
-  const {
-    value, setValue, type, title, step, min, max,
-  } = props;
+  const { value, setValue, type, title } = props;
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(scale(newValue));
   };
 
-  const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
+  function valuetext(val) {
+    return `${scale(val)} Generations`;
+  }
 
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > max) {
-      setValue(max);
-    }
-  };
+  function valueLabelFormat(val) {
+    return `${scale(val)}`;
+  }
+
+  const marks = [
+    {
+      value: 0,
+      label: `${min} Generations`,
+    },
+    {
+      value: 100,
+      label: `${max} Generations`,
+    },
+  ];
 
   return (
     <div className={classes.root}>
@@ -45,25 +63,15 @@ export default function FrequencySlider(props) {
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            value={typeof value === 'number' ? value : 0}
+            defaultValue={0}
+            getAriaValueText={valuetext}
+            aria-labelledby="discrete-slider-always"
             onChange={handleSliderChange}
-            aria-labelledby={`${type}-slider`}
-          />
-        </Grid>
-        <Grid item>
-          <Input
-            className={classes.input}
-            value={value}
-            margin="dense"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step,
-              min,
-              max,
-              type: 'number',
-              'aria-labelledby': `${type}-slider`,
-            }}
+            step={step}
+            marks={marks}
+            value={normalize(value)}
+            valueLabelFormat={valueLabelFormat}
+            valueLabelDisplay="on"
           />
         </Grid>
       </Grid>
@@ -75,7 +83,4 @@ FrequencySlider.propTypes = {
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  step: PropTypes.number.isRequired,
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
 };

@@ -67,7 +67,6 @@ function App() {
 
   // Disable submit unless all percentages add to 100
   function isSubmitDisabled() {
-    console.log('TCL: isSubmitDisabled -> (hetero + homoD + homoR)', (hetero + homoD + homoR));
     return !((hetero + homoD + homoR) === 100);
   }
 
