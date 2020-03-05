@@ -7,7 +7,6 @@ export default function DataVis(props) {
     <>
       <p>
         {JSON.stringify(data)}
-
       </p>
     </>
   );
