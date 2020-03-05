@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/genetic-sim-frontend/precache-manifest.1c5a91c42993892f1c51a228dbfc77aa.js"
+  "/genetic-sim-frontend/precache-manifest.3befbf8446ebd62d219c4892b7a3255b.js"
 );
 
 self.addEventListener('message', (event) => {
