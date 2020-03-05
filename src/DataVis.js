@@ -7,12 +7,11 @@ export default function DataVis(props) {
     <>
       <p>
         {JSON.stringify(data)}
-
       </p>
     </>
   );
 }
 
 DataVis.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GenSimAppBar() {
+export default function GenSimAppBar(props) {
   const classes = useStyles();
-
+  const { apps, displayText, setCurrentApp } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -32,10 +33,17 @@ export default function GenSimAppBar() {
           <Typography variant="h6" className={classes.title}>
             SimGen
           </Typography>
-          <Button color="inherit">Genotypes</Button>
-          <Button color="inherit">Punnet Square</Button>
+          {apps.map((app) => (
+            <Button key={app} color="inherit" onClick={() => setCurrentApp(app)}>{displayText[app]}</Button>
+          ))}
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+GenSimAppBar.propTypes = {
+  apps: PropTypes.arrayOf(PropTypes.string).isRequired,
+  displayText: PropTypes.objectOf(PropTypes.string).isRequired,
+  setCurrentApp: PropTypes.func.isRequired,
+};

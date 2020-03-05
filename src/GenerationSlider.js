@@ -4,33 +4,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles({
   root: {
     width: 250,
   },
-  input: {
-    width: 42,
-  },
 });
 
-// Some constants for scaling values from slider values 0-100 to relevant values
-const min = 100;
-const max = 500;
-const step = 10;
-const rate = ((max - min) / 100);
-const bias = min;
-function scale(val) {
-  return (val * rate) + bias;
-}
-function normalize(val) {
-  return (val - bias) / rate;
-}
 
-export default function FrequencySlider(props) {
+export default function GenerationSlider(props) {
   const classes = useStyles();
-  const { value, setValue, type, title } = props;
+  const {
+    value, setValue, type, title, min, max, step,
+  } = props;
+  // Some constants for scaling values from slider values 0-100 to relevant values
+  const rate = ((max - min) / 100);
+  const bias = min;
+  function scale(val) {
+    return (val * rate) + bias;
+  }
+  function normalize(val) {
+    return (val - bias) / rate;
+  }
 
   const handleSliderChange = (event, newValue) => {
     setValue(scale(newValue));
@@ -71,16 +66,24 @@ export default function FrequencySlider(props) {
             marks={marks}
             value={normalize(value)}
             valueLabelFormat={valueLabelFormat}
-            valueLabelDisplay="on"
+            valueLabelDisplay="auto"
           />
         </Grid>
       </Grid>
     </div>
   );
 }
-FrequencySlider.propTypes = {
+GenerationSlider.propTypes = {
   value: PropTypes.number.isRequired,
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  step: PropTypes.number,
+};
+GenerationSlider.defaultProps = {
+  min: 100,
+  max: 1000,
+  step: 10,
 };
