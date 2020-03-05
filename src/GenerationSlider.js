@@ -31,7 +31,7 @@ export default function GenerationSlider(props) {
     setValue(scale(newValue));
   };
 
-  function valuetext(val) {
+  function valueText(val) {
     return `${scale(val)} Generations`;
   }
 
@@ -49,6 +49,9 @@ export default function GenerationSlider(props) {
       label: `${max} Generations`,
     },
   ];
+  console.log('GenerationSlider -> parseInt((step / (max - min)) * 100, 10)', (step / (max - min)) * 100, 10);
+  console.log('GenerationSlider -> (max - min)', (max - min));
+  console.log('GenerationSlider -> step', step);
 
   return (
     <div className={classes.root}>
@@ -59,10 +62,10 @@ export default function GenerationSlider(props) {
         <Grid item xs>
           <Slider
             defaultValue={0}
-            getAriaValueText={valuetext}
+            getAriaValueText={valueText}
             aria-labelledby="discrete-slider-always"
             onChange={handleSliderChange}
-            step={step}
+            step={parseInt((step / (max - min)) * 100, 10)}
             marks={marks}
             value={normalize(value)}
             valueLabelFormat={valueLabelFormat}
@@ -84,6 +87,6 @@ GenerationSlider.propTypes = {
 };
 GenerationSlider.defaultProps = {
   min: 100,
-  max: 1000,
-  step: 10,
+  max: 1100,
+  step: 100,
 };

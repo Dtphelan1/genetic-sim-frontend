@@ -1,22 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GenSimAppBar from './GenSimAppBar';
 import GenotypeSimulatorApp from './GenotypeSimulatorApp';
 import PunnetSquareSimulatorApp from './PunnetSquareSimulatorApp';
 import './App.css';
-
-const useStyles = makeStyles((theme) => ({
-  freqInput: {
-    width: 250,
-  },
-  gridContainer: {
-    margin: theme.spacing(2),
-  },
-  gridElements: {
-    padding: theme.spacing(2),
-  },
-}));
 
 const AppLookup = {
   GenotypeSimulator: GenotypeSimulatorApp,

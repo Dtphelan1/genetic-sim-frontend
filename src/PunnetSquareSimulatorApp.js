@@ -126,9 +126,6 @@ export default function PunnetSquareSimulatorApp() {
               type="generations"
               title="Number of Generations"
               value={generations}
-              step={50}
-              min={100}
-              max={1000}
               setValue={setGenerations}
             />
             <Button variant="contained" color="primary" disabled={isSubmitDisabled()} onClick={runSim}>
