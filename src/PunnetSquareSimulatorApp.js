@@ -5,9 +5,11 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import GenerationSlider from './GenerationSlider';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import DataVis from './DataVis';
-import FrequencyInput from './FrequencyInput';
+import GenerationSlider from './GenerationSlider';
 import './App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +42,7 @@ export default function PunnetSquareSimulatorApp() {
   function safeguard(inputFn) {
     return (value) => {
       // If the value is a number, pass to the inputFN
-      if (value.length < 2) {
+      if (value.length <= 2) {
         return inputFn(value);
       }
       // Else return nothing
@@ -91,7 +93,8 @@ export default function PunnetSquareSimulatorApp() {
             Punnet Square Simulator
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Run experiments
+            Generate a bunch of offspring and see how the population metrics match up
+            with the punnett square predictions
           </Typography>
         </Grid>
         <Grid item xs={6} className={classes.gridElements}>
@@ -103,13 +106,19 @@ export default function PunnetSquareSimulatorApp() {
               const { title, value, setValue } = populationVariant[ty];
               return (
                 <Grid item key={ty} className={classes.freqInput}>
-                  <FrequencyInput
-                    type={ty}
-                    title={title}
-                    value={value}
-                    setValue={setValue}
-                    isError={isSubmitDisabled}
-                  />
+                  <FormControl className={classes.root}>
+                    <Input
+                      id={`${ty}-input`}
+                      value={value}
+                      onChange={(event) => safeguard(setValue)(event.target.value)}
+                      aria-describedby={`${ty}-input-helper-text`}
+                      error={isSubmitDisabled()}
+                      inputProps={{
+                        'aria-label': 'frequency',
+                      }}
+                    />
+                    <FormHelperText id={`${ty}-input-helper-text`}>{title}</FormHelperText>
+                  </FormControl>
                 </Grid>
               );
             })}
