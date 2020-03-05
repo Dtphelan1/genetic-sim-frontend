@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/genetic-sim-frontend/static/css/main.27fd15f6.chunk.css",
-    "main.js": "/genetic-sim-frontend/static/js/main.806634b5.chunk.js",
-    "main.js.map": "/genetic-sim-frontend/static/js/main.806634b5.chunk.js.map",
+    "main.js": "/genetic-sim-frontend/static/js/main.661287ff.chunk.js",
+    "main.js.map": "/genetic-sim-frontend/static/js/main.661287ff.chunk.js.map",
     "runtime-main.js": "/genetic-sim-frontend/static/js/runtime-main.3c30635a.js",
     "runtime-main.js.map": "/genetic-sim-frontend/static/js/runtime-main.3c30635a.js.map",
-    "static/js/2.3778bdf0.chunk.js": "/genetic-sim-frontend/static/js/2.3778bdf0.chunk.js",
-    "static/js/2.3778bdf0.chunk.js.map": "/genetic-sim-frontend/static/js/2.3778bdf0.chunk.js.map",
+    "static/js/2.29f203f7.chunk.js": "/genetic-sim-frontend/static/js/2.29f203f7.chunk.js",
+    "static/js/2.29f203f7.chunk.js.map": "/genetic-sim-frontend/static/js/2.29f203f7.chunk.js.map",
     "index.html": "/genetic-sim-frontend/index.html",
-    "precache-manifest.d2a0ef6932bad45efecde02e9afe3148.js": "/genetic-sim-frontend/precache-manifest.d2a0ef6932bad45efecde02e9afe3148.js",
+    "precache-manifest.ed31180fa9168981fb347c6ad0274a61.js": "/genetic-sim-frontend/precache-manifest.ed31180fa9168981fb347c6ad0274a61.js",
     "service-worker.js": "/genetic-sim-frontend/service-worker.js",
     "static/css/main.27fd15f6.chunk.css.map": "/genetic-sim-frontend/static/css/main.27fd15f6.chunk.css.map",
-    "static/js/2.3778bdf0.chunk.js.LICENSE.txt": "/genetic-sim-frontend/static/js/2.3778bdf0.chunk.js.LICENSE.txt"
+    "static/js/2.29f203f7.chunk.js.LICENSE.txt": "/genetic-sim-frontend/static/js/2.29f203f7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3c30635a.js",
-    "static/js/2.3778bdf0.chunk.js",
+    "static/js/2.29f203f7.chunk.js",
     "static/css/main.27fd15f6.chunk.css",
-    "static/js/main.806634b5.chunk.js"
+    "static/js/main.661287ff.chunk.js"
   ]
 }
