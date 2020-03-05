@@ -83,7 +83,7 @@ export default function GenotypeSimulatorApp() {
       generations,
     };
     const host = 'http://127.0.0.1:5000/';
-    const path = 'runSim';
+    const path = 'runPopSim';
     const data = await axios.get(host + path, {
       params,
     });
@@ -93,13 +93,15 @@ export default function GenotypeSimulatorApp() {
   return (
     <Container maxWidth="lg">
       <Grid container className={classes.gridContainer}>
-        <Typography variant="h3">
-          Genotype Frequencies
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          Decide what our population&apos;s initial genotypes frequencies are
-          and how many different generations to create to see what happens over time
-        </Typography>
+        <Grid item xs={12}>
+          <Typography variant="h3">
+            Genotype Frequencies
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Decide what our population&apos;s initial genotypes frequencies are
+            and how many different generations to create to see what happens over time
+          </Typography>
+        </Grid>
         <Grid item xs={6} className={classes.gridElements}>
           <Typography variant="h5" gutterBottom>
             Input Parameters

@@ -22,26 +22,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const host = 'http://127.0.0.1:5000/';
 
 export default function PunnetSquareSimulatorApp() {
   const classes = useStyles();
   // Create state and lookup table for each type of population member
   const populationVariant = {
-    hetero: {
-      title: 'Frequency of Heterozygous',
+    parentA: {
+      title: 'Alleles for Parent A',
     },
-    homoD: {
-      title: 'Frequency of Homozygous Dominant',
-    },
-    homoR: {
-      title: 'Frequency of Homozygous Recessive',
+    parentB: {
+      title: 'Alleles for Parent B',
     },
   };
 
   function safeguard(inputFn) {
     return (value) => {
       // If the value is a number, pass to the inputFN
-      if (!Number.isNaN(value)) {
+      if (value.length < 2) {
         return inputFn(value);
       }
       // Else return nothing
@@ -49,57 +47,53 @@ export default function PunnetSquareSimulatorApp() {
     };
   }
 
-  const [hetero, setHetero] = React.useState(33);
-  populationVariant.hetero.value = hetero;
-  populationVariant.hetero.setValue = safeguard(setHetero);
-  const [homoD, setHomoD] = React.useState(33);
-  populationVariant.homoD.value = homoD;
-  populationVariant.homoD.setValue = safeguard(setHomoD);
-  const [homoR, setHomoR] = React.useState(34);
-  populationVariant.homoR.value = homoR;
-  populationVariant.homoR.setValue = safeguard(setHomoR);
+  const [parentA, setParentA] = React.useState('BB');
+  populationVariant.parentA.value = parentA;
+  populationVariant.parentA.setValue = safeguard(setParentA);
+  const [parentB, setParentB] = React.useState('bb');
+  populationVariant.parentB.value = parentB;
+  populationVariant.parentB.setValue = safeguard(setParentB);
   // Create state for the number of runs
   const [generations, setGenerations] = useState(100);
   // Create a place to store the resulting data
-  const [conditionData, setConditionData] = useState({});
+  const [offspringData, setOffspringData] = useState({});
 
   // Disable submit unless all percentages add to 100
   function isSubmitDisabled() {
-    return !((hetero + homoD + homoR) === 100);
+    return (parentA.length !== 2 && parentB.length !== 2);
   }
 
   function buttonText() {
     if (!isSubmitDisabled()) {
-      return 'Submit';
+      return 'Generate Offspring';
     }
-    return 'Ensure Geneotype Percents Add to 100';
+    return 'Make sure your alleles are correct';
   }
 
   async function runSim() {
     const params = {
-      hetero,
-      homoD,
-      homoR,
+      parentA,
+      parentB,
       generations,
     };
-    const host = 'http://127.0.0.1:5000/';
-    const path = 'runSim';
+    const path = 'runOffspringSim';
     const data = await axios.get(host + path, {
       params,
     });
-    setConditionData(data.data);
+    setOffspringData(data.data);
   }
 
   return (
     <Container maxWidth="lg">
       <Grid container className={classes.gridContainer}>
-        <Typography variant="h3">
-          Punnet Square Simulator
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          Decide what our population&apos;s initial genotypes frequencies are
-          and how many different generations to create to see what happens over time
-        </Typography>
+        <Grid item xs={12}>
+          <Typography variant="h3">
+            Punnet Square Simulator
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Run experiments
+          </Typography>
+        </Grid>
         <Grid item xs={6} className={classes.gridElements}>
           <Typography variant="h5" gutterBottom>
             Input Parameters
@@ -138,7 +132,7 @@ export default function PunnetSquareSimulatorApp() {
             Output Data
           </Typography>
           <DataVis
-            data={conditionData}
+            data={offspringData}
           />
         </Grid>
       </Grid>
