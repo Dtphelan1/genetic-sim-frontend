@@ -50,7 +50,7 @@ export default function PunnetSquareSimulatorApp() {
   const [parentA, setParentA] = React.useState('BB');
   populationVariant.parentA.value = parentA;
   populationVariant.parentA.setValue = safeguard(setParentA);
-  const [parentB, setParentB] = React.useState('bb');
+  const [parentB, setParentB] = React.useState('Bb');
   populationVariant.parentB.value = parentB;
   populationVariant.parentB.setValue = safeguard(setParentB);
   // Create state for the number of runs
