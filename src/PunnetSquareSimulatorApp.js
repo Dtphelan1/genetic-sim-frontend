@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const host = 'http://127.0.0.1:5000/';
+const host = 'https://genetic-simulator.herokuapp.com/';
+const path = 'runOffspringSim';
 
 export default function PunnetSquareSimulatorApp() {
   const classes = useStyles();
@@ -76,7 +77,6 @@ export default function PunnetSquareSimulatorApp() {
       parentB,
       generations,
     };
-    const path = 'runOffspringSim';
     const data = await axios.get(host + path, {
       params,
     });

@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const host = 'https://genetic-simulator.herokuapp.com/';
+const path = 'runPopSim';
 
 export default function GenotypeSimulatorApp() {
   const classes = useStyles();
@@ -82,8 +84,6 @@ export default function GenotypeSimulatorApp() {
       homoR,
       generations,
     };
-    const host = 'http://127.0.0.1:5000/';
-    const path = 'runPopSim';
     const data = await axios.get(host + path, {
       params,
     });
